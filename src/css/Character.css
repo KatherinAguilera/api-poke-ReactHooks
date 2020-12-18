@@ -1,0 +1,10 @@
+.Characters{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Character{
+  margin-right: 1rem;
+  
+}

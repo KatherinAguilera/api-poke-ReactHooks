@@ -36,3 +36,20 @@
     transform: rotate(360deg);
   }
 }
+.bg-light {
+  background:blanchedalmond;
+}
+
+.text-light{
+  color:blanchedalmond
+
+}
+
+.bg-dark{
+  background: #282c34;
+}
+
+.text-dark{
+  color: #282c34;
+
+}
