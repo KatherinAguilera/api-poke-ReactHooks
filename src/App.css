@@ -14,16 +14,40 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
+.App-header button {
+  text-decoration: none;
+  padding: .8rem;
+  color: blueviolet;
+  border-radius: 0.25rem;
+  border: 6px solid #FECC16;
+  background-color: #7ABB60;
+  color: white;
+  outline: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  transition: .8s;
+
+}
+.App-header button:hover{
+  text-decoration: none;
+  color: #FFF;
+  background: #CFC91D;
+  border-top: 6px solid #7ABB60;
+  border-bottom: 0 none;
+  cursor: pointer;
+
+}
+.App-header .button:hover{
+
+}
 .App-link {
   color: #61dafb;
 }
@@ -52,4 +76,20 @@
 .text-dark{
   color: #282c34;
 
+}
+
+.Dark{
+  background: #192a51;
+  color:#f5e6e8;
+}
+
+.Light{
+  background:#f5e6e8;
+  color: #192a51;
+}
+
+.Content{
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
 }

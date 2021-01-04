@@ -2,9 +2,33 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .Character{
-  margin-right: 1rem;
-  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 1rem;
+  box-shadow: -1px 12px 8px 0 rgba(0,0,0,.15);
+  padding-bottom: .75rem;
+}
+
+.Character img{
+  width: 150px;
+  height: 150px;
+}
+
+.Character p{
+  margin: 4px;
+}
+
+.Character--name{
+  text-transform: capitalize;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.Character--type{
+  text-transform: capitalize;
 }
