@@ -36,7 +36,7 @@ function App() {
   return (
     <ThemeContext.Provider value={{darkMode, setDarkMode}}>
         <div className={darkMode? "Dark": "Light"}>
-          <Header/>
+          <Header />
           <div className="Content">
             <Characters/>
           </div>

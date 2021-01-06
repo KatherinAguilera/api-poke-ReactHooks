@@ -15,32 +15,46 @@
 
 .App-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-evenly;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+}
+.HeaderDark{
+  background: #212121;
+}
+.HeaderLight{
+  background-color: #fa6868;
 }
 
+
+.App-header h1{
+  border-style: dashed double ;
+  padding: 0 2rem;
+  font-size: 2rem;
+
+}
 .App-header button {
   text-decoration: none;
   padding: .8rem;
   color: blueviolet;
   border-radius: 0.25rem;
-  border: 6px solid #FECC16;
-  background-color: #7ABB60;
+  border: 6px solid #fad586;
+  background-color: #7ab893;
   color: white;
   outline: 0;
   border-top: 0;
   border-left: 0;
   border-right: 0;
   transition: .8s;
+  color: #ffffff;
+  font-weight: 600;
 
 }
 .App-header button:hover{
   text-decoration: none;
-  color: #FFF;
-  background: #CFC91D;
-  border-top: 6px solid #7ABB60;
+  color: #184d47;
+  background: #fad586;
+  border-top: 6px solid #7ab893;
   border-bottom: 0 none;
   cursor: pointer;
 

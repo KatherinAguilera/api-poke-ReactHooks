@@ -31,7 +31,7 @@ export default function Header() {
     }
 
     return (
-        <div className="App-header" >
+        <div className={ `App-header ${darkMode? "HeaderDark": "HeaderLight"} `} >
             <h1>Poke API</h1>
             <div className="button">
               <button type="button" onClick={handleClick}>{darkMode ? 'Dark 🌑' : 'Light 🌞'}</button>
