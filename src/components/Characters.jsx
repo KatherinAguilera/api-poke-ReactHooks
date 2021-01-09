@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useEffect, useReducer, useMemo } from 'react'
 import '../css/Character.css'
 import Loader from './Loader'
 
@@ -24,16 +24,16 @@ const favoriteReducer = (state, action) => {
 
 const Characters = () => {
 
-  // const [characters, setCharacters] = useState([]);
   const [result, setResult] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [load, setLoad] = useState('true');
 
-  const [myfavorites, dispatch] = useReducer(favoriteReducer, initialState) 
+  const [myfavorites, dispatch] = useReducer(favoriteReducer, initialState)
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [show, setShow] = useState(false);
+
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -44,6 +44,14 @@ const Characters = () => {
       setSearchResults(pokemons);
     }
   }, [searchTerm]);
+
+  // BUSCADOR CON USE MEMO
+//   const filteredUsers = useMemo(() =>
+//   pokemons.filter((user) => {
+//     return user.name.toLowerCase().includes(searchTerm.toLowerCase());
+//   }),
+//   [pokemons, searchTerm]
+// )
 
   useEffect(() => {
     console.log('kolo');
@@ -86,6 +94,13 @@ const Characters = () => {
           <label htmlFor="element">Pokemón</label>
       </span>
     </div>
+    {/* Buscador con use Memo */}
+    {/* {filteredUsers.map(character => (
+        <div className="item" key={character.id}>
+          <h2>{character.name}</h2>
+          <button type="button" onClick={() => handleClick(character)}>Agregar a Favoritos</button>
+        </div>
+      ))} */}
     <div className= "">
     { load ? (
     <Loader />
@@ -96,11 +111,11 @@ const Characters = () => {
 
           {myfavorites.favorites.map(favorite => (
             <>
-            
+
             <div key={favorite.id} >
 
               <div className='Characters--favorite'>
-                
+
                 <img  src={favorite.sprites.front_default} alt='pokemon' />
                 <div>
                   {/* <p className="Character--name">{favorite.name}</p> */}
@@ -122,8 +137,9 @@ const Characters = () => {
                 <p className="Character--name">{poke.name}</p>
                 <p className="Character--type">Type: {poke.types[0].type.name}</p>
               </div>
+            <button className="Character--buttonFav" type="button" onClick={() => handleClick(poke)}>Agregar a favoritos</button>
+
             </div>
-            <button type="button" onClick={() => handleClick(poke)}>Agregar a Favoritos</button>
           </div>
           ))}
         </div>
