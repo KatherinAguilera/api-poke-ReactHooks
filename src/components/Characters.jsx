@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer, useMemo } from 'react'
+import { useState, useEffect, useReducer, useMemo, useRef } from 'react'
 import '../css/Character.css'
 import Loader from './Loader'
 
@@ -27,16 +27,16 @@ const Characters = () => {
   const [result, setResult] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [load, setLoad] = useState('true');
-
   const [myfavorites, dispatch] = useReducer(favoriteReducer, initialState)
-
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  // const [show, setShow] = useState(false);
 
-  /******* useEffect PARA BUSCADOR ********/
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+  /**************useREf************************/
+  const searchInput = useRef(null);
+
+  /******* useEffect y useref PARA BUSCADOR ********/
+  const handleChange = () => {
+    setSearchTerm(searchInput.current.value);
   };
   useEffect(() => {
     const results = searchResults.filter((person) => person.name.toLowerCase().includes(searchTerm));
@@ -54,12 +54,8 @@ const Characters = () => {
 //   [pokemons, searchTerm]
 // )
 
-  // useEffect(() => {
-  //   console.log('kolo');
-  // }, [show]);
 
-
-  /****** En useEffect se pasa una Funcion anonima y variable que va a estar escuhando si no hay una variable sera un arreglo vacio****/
+  /****** USE EFFECT En useEffect se pasa una Funcion anonima y variable que va a estar escuhando si no hay una variable sera un arreglo vacio****/
   const arr = [];
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=500')
@@ -89,7 +85,7 @@ const Characters = () => {
     <div className="search">
       <span>
         <input className="searchTerm" id="element" type="text" placeholder="Busca tu pokemon!"  value={searchTerm}
-          onChange={handleChange}/>
+          onChange={handleChange} ref={searchInput}/>
           <label htmlFor="element">Pokemón</label>
       </span>
     </div>
@@ -97,7 +93,7 @@ const Characters = () => {
     {/* <div className="Search">
       <input type="text" value={searchTerm} onChange={handleChange} />
     </div> */}
-{/* 
+    {/*
       {filteredUsers.map(character => (
         <div className="item" key={character.id}>
           <h2>{character.name}</h2>
@@ -114,18 +110,11 @@ const Characters = () => {
 
           {myfavorites.favorites.map(favorite => (
             <>
-
-            <div key={favorite.id} >
-
-              <div className='Characters--favorite'>
-
-                <img  src={favorite.sprites.front_default} alt='pokemon' />
-                <div>
-                  {/* <p className="Character--name">{favorite.name}</p> */}
-                  {/* <p className="Character--type">Type: {favorite.types[0].type.name}</p> */}
+              <div key={favorite.id} >
+                <div className='Characters--favorite'>
+                  <img  src={favorite.sprites.front_default} alt='pokemon' />
                 </div>
               </div>
-            </div>
             </>
           ))}
         </div>
