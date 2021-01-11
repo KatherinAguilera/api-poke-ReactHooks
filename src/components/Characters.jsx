@@ -1,9 +1,10 @@
-import { useState, useEffect, useReducer, useMemo, useRef } from 'react'
+import { useState, useEffect, useReducer, useMemo, useRef, useCallback } from 'react'
 import '../css/Character.css'
+import '../css/Search.css';
 import Loader from './Loader'
-
+import Search from './Search';
+import Character from './Character'
 /**************useReducer*************/
-
 const initialState = {
   favorites: []
 }
@@ -15,6 +16,13 @@ const favoriteReducer = (state, action) => {
         ...state,
         favorites: [...state.favorites, action.payload]
       };
+      case 'REMOVE_FROM_FAVORITES':
+			return {
+				...state,
+				favorites: [
+					...state.favorites.filter((favorite) => favorite !== action.payload),
+				],
+			};
     default:
       return state;
   }
@@ -30,14 +38,15 @@ const Characters = () => {
   const [myfavorites, dispatch] = useReducer(favoriteReducer, initialState)
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [isFavorite, setIsFavorite] = useState([]);
 
   /**************useREf************************/
   const searchInput = useRef(null);
 
   /******* useEffect y useref PARA BUSCADOR ********/
-  const handleChange = () => {
+  const handleSearch = useCallback(() => {
     setSearchTerm(searchInput.current.value);
-  };
+  });
   useEffect(() => {
     const results = searchResults.filter((person) => person.name.toLowerCase().includes(searchTerm));
     setSearchResults(results);
@@ -76,70 +85,57 @@ const Characters = () => {
     setLoad(false);
     }, 1000);
 
-    const handleClick = favorite => {
-      dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })
+    const handleFavorite = favorite => {
+      // dispatch({ type: 'ADD_TO_FAVORITE', payload: favorite })
+      dispatch({
+        type: !!isCharacterInFavorites(favorite)
+          ? 'REMOVE_FROM_FAVORITES'
+          : 'ADD_TO_FAVORITE',
+        payload: favorite,
+      });
     }
 
-  return (
-    <>
-    <div className="search">
-      <span>
-        <input className="searchTerm" id="element" type="text" placeholder="Busca tu pokemon!"  value={searchTerm}
-          onChange={handleChange} ref={searchInput}/>
-          <label htmlFor="element">Pokemón</label>
-      </span>
-    </div>
-    {/* BUSCADOR CON uSEMEMO */}
-    {/* <div className="Search">
-      <input type="text" value={searchTerm} onChange={handleChange} />
-    </div> */}
-    {/*
-      {filteredUsers.map(character => (
-        <div className="item" key={character.id}>
-          <h2>{character.name}</h2>
-          <button type="button" onClick={() => handleClick(character)}>Agregar a Favoritos</button>
-        </div>
-      ))} */}
-    <div className= "">
-    { load ? (
-    <Loader />
-    ) : (
+    // Remover favorito
+    const isCharacterInFavorites = (favorite) =>
+      myfavorites.favorites.find((character, key) => character.id === favorite.id );
+    return (
       <>
-        <div className='Characters__favorites'>
-        <p className="Character__title">Pokemones favoritos:</p>
-
-          {myfavorites.favorites.map(favorite => (
-            <>
-              <div key={favorite.id} >
-                <div className='Characters--favorite'>
-                  <img  src={favorite.sprites.front_default} alt='pokemon' />
-                </div>
-              </div>
-            </>
-          ))}
-        </div>
-
-        <div className="Characters">
-
-          {searchResults.map((poke, i) => (
-          <div id={poke.id} key={poke.id} >
-            <div className='Character'>
-              <img  src={poke.sprites.front_default} alt='pokemon' />
-              <div>
-                <p className="Character--name">{poke.name}</p>
-                <p className="Character--type">Type: {poke.types[0].type.name}</p>
-              </div>
-            <button className="Character--buttonFav" type="button" onClick={() => handleClick(poke)}>Agregar a favoritos</button>
-
-            </div>
+        <Search searchTerm={searchTerm} searchInput={searchInput} handleSearch={handleSearch} />
+      {/* BUSCADOR CON uSEMEMO */}
+      {/* <div className="Search">
+        <input type="text" value={searchTerm} onChange={handleChange} />
+      </div> */}
+      {/*
+        {filteredUsers.map(character => (
+          <div className="item" key={character.id}>
+            <h2>{character.name}</h2>
+            <button type="button" onClick={() => handleClick(character)}>Agregar a Favoritos</button>
           </div>
-          ))}
-        </div>
+        ))} */}
+      <div className= "">
+      { load ? (
+      <Loader />
+      ) : (
+        <>
+          <div className='Characters__favorites'>
+          <p className="Character__title">Pokemones favoritos:</p>
 
-      </>
-    )}
-  </div>
-  </>
+            {myfavorites.favorites.map(favorite => (
+              <>
+                <div key={favorite.id} >
+                  <div className='Characters--favorite'>
+                    <img  src={favorite.sprites.front_default} alt='pokemon' />
+                  </div>
+                </div>
+              </>
+            ))}
+          </div>
+          {/* LISTADO Y FILTRO DE POKEMONES */}
+          <Character searchResults={searchResults} isFavorite={true} isCharacterInFavorites={isCharacterInFavorites} handleFavorite={handleFavorite} />
+        </>
+      )}
+    </div>
+    </>
   );
 }
 
