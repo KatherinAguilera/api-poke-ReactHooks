@@ -2,7 +2,7 @@ import { useState, useEffect, useReducer, useMemo } from 'react'
 import '../css/Character.css'
 import Loader from './Loader'
 
-// useReducer
+/**************useReducer*************/
 
 const initialState = {
   favorites: []
@@ -32,8 +32,9 @@ const Characters = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [show, setShow] = useState(false);
+  // const [show, setShow] = useState(false);
 
+  /******* useEffect PARA BUSCADOR ********/
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -45,7 +46,7 @@ const Characters = () => {
     }
   }, [searchTerm]);
 
-  // BUSCADOR CON USE MEMO
+/******** BUSCADOR CON USE MEMO***********/
 //   const filteredUsers = useMemo(() =>
 //   pokemons.filter((user) => {
 //     return user.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -53,14 +54,13 @@ const Characters = () => {
 //   [pokemons, searchTerm]
 // )
 
-  useEffect(() => {
-    console.log('kolo');
-  }, [show]);
+  // useEffect(() => {
+  //   console.log('kolo');
+  // }, [show]);
 
+
+  /****** En useEffect se pasa una Funcion anonima y variable que va a estar escuhando si no hay una variable sera un arreglo vacio****/
   const arr = [];
-  //en useEffect se pasa una Funcion anonima y variable que va a estar escuhando si no hay una variable sera un arreglo vacio
-
-
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=500')
     .then((response) => response.json())
@@ -72,7 +72,6 @@ const Characters = () => {
       setPokemons(arr);
       setSearchResults(arr);
       dispatch(arr)
-
       return item.url;
     }),
   ));
@@ -94,8 +93,12 @@ const Characters = () => {
           <label htmlFor="element">Pokemón</label>
       </span>
     </div>
-    {/* Buscador con use Memo */}
-    {/* {filteredUsers.map(character => (
+    {/* BUSCADOR CON uSEMEMO */}
+    {/* <div className="Search">
+      <input type="text" value={searchTerm} onChange={handleChange} />
+    </div> */}
+{/* 
+      {filteredUsers.map(character => (
         <div className="item" key={character.id}>
           <h2>{character.name}</h2>
           <button type="button" onClick={() => handleClick(character)}>Agregar a Favoritos</button>
