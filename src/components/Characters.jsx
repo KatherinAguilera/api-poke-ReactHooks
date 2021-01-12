@@ -1,4 +1,5 @@
-import { useState, useEffect, useReducer, useMemo, useRef, useCallback } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useEffect, useReducer,  useRef, useCallback } from 'react'
 import '../css/Character.css'
 import '../css/Search.css';
 import Loader from './Loader'
@@ -32,18 +33,19 @@ const favoriteReducer = (state, action) => {
 
 const Characters = () => {
 
-  const [result, setResult] = useState([]);
+  const [, setResult] = useState([]);
   const [pokemons, setPokemons] = useState([]);
   const [load, setLoad] = useState('true');
   const [myfavorites, dispatch] = useReducer(favoriteReducer, initialState)
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [isFavorite, setIsFavorite] = useState([]);
+  // const [isFavorite, setIsFavorite] = useState([]);
 
   /**************useREf************************/
   const searchInput = useRef(null);
 
   /******* useEffect y useref PARA BUSCADOR ********/
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearch = useCallback(() => {
     setSearchTerm(searchInput.current.value);
   });
@@ -53,6 +55,7 @@ const Characters = () => {
     if (searchTerm === '') {
       setSearchResults(pokemons);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
 /******** BUSCADOR CON USE MEMO***********/

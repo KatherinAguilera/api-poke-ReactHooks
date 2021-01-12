@@ -22,7 +22,7 @@
 
 // export default Header;
 
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import ThemeContext from '../context/ThemeContext';
 export default function Header() {
     const {darkMode, setDarkMode} = useContext(ThemeContext);
