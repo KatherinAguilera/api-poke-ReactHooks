@@ -140,6 +140,7 @@ span:nth-child(2) .searchTerm:active {
   margin: 0 auto;
   display: flex;
   border-radius: 0.25rem;
+  opacity: .6;
 }
 .no-found article{
   position: absolute;
@@ -148,4 +149,13 @@ span:nth-child(2) .searchTerm:active {
 }
 .no-found p{
   margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .searchTerm {
+    width: 250px;
+  }
+  .search:first-child {
+    padding: 0;
+  }
 }

@@ -131,7 +131,10 @@ const Characters = () => {
             ))}
           </div>
           {/* LISTADO Y FILTRO DE POKEMONES */}
-          <Character searchResults={searchResults} isFavorite={true} isCharacterInFavorites={isCharacterInFavorites} handleFavorite={handleFavorite} />
+          <Character 
+            searchResults={searchResults} 
+            isCharacterInFavorites={isCharacterInFavorites} 
+            handleFavorite={handleFavorite} />
         </>
       )}
     </div>

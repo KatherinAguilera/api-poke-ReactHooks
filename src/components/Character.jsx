@@ -1,6 +1,6 @@
 import noPokemon from '../images/noPokemon.jpg'
 
-const Character = ({searchResults, isCharacterInFavorites, isFavorite, handleFavorite}) => {
+const Character = ({searchResults, isCharacterInFavorites,  handleFavorite}) => {
 
     return (
       <div className="Characters">
@@ -14,7 +14,7 @@ const Character = ({searchResults, isCharacterInFavorites, isFavorite, handleFav
             <p className="Character--type">Type: {poke.types[0].type.name}</p>
           </div>
           <button 
-            className="Character--buttonFav" 
+            className={`Character--buttonFav ${!!isCharacterInFavorites(poke)? "btn-delete": "btn-add"} `} 
             type="button"
             onClick={() => handleFavorite(poke)} 
             >
@@ -29,7 +29,7 @@ const Character = ({searchResults, isCharacterInFavorites, isFavorite, handleFav
         <article>
           <p>Don't found Pokemon :(</p>
         </article>
-        <img src={noPokemon} alt="Pokeon no encontrado"/>
+        <img src={noPokemon} alt="Pokemon no encontrado"/>
       </div>
       :null}
     </div>

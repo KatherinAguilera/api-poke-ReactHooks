@@ -52,7 +52,6 @@
   padding: .4rem;
   color: blueviolet;
   border-radius: 0.25rem;
-  background-color: #fad586;
   outline: 0;
   border-top: 0;
   border-left: 0;
@@ -64,10 +63,23 @@
   margin-top: 1.25rem;
   cursor: pointer;
 }
-.Character--buttonFav:hover{
+
+.btn-delete{
+  background-color: #fad586;
+}
+.btn-delete:hover{
   background-color: #7ab893;
+  color:white
+}
+.btn-add{
+  background-color:#7ab893;
   color: #ffffff;
 }
+.btn-add:hover{
+  background-color:#fad586;
+  color: #192a51;
+}
+
 .Characters__favorites{
   display: flex;
   overflow-x: auto;
@@ -81,6 +93,4 @@
   letter-spacing: 4px;
   font-size: 1rem;
 }
-
-
 
